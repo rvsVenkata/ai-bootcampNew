@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "borski": {
+      "source": {
+        "source": "github",
+        "repo": "borski/travel-hacking-toolkit"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "travel-hacker@borski": true
+  }
+}
