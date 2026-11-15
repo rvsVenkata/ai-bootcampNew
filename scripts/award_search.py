@@ -75,7 +75,9 @@ def route(a):
         legs = " -> ".join(f'{l["flights"]} [{l["mileage_program"]} {l["miles_price"]:,}, '
                            f'{l.get("remaining_seats", "?")} seats, {l["minutes_old"] // 60}h old]' for l in t["legs"])
         lay = f'  layover {t["lay"]:.1f}h' if t["lay"] is not None else ""
-        print(f'{t["miles"]:>8,} mi/person +${t["usd"]:,.0f}  {path}  {t["legs"][0]["departs_at"]}  {legs}{lay}')
+        other = [l["taxes"] for l in t["legs"] if not l["taxes"].endswith("USD")]
+        fees = f'+${t["usd"]:,.0f}' + "".join(f" +{x}" for x in other)
+        print(f'{t["miles"]:>8,} mi/person {fees}  {path}  {t["legs"][0]["departs_at"]}  {legs}{lay}')
         if n >= a.top:
             break
     if not trips:
